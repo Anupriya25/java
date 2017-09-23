@@ -22,7 +22,11 @@ public class HelloWorld {
             for (int i = 0; i < len; i++) {
                 second = 0 + second;
             }
-            System.out.println(second);
+        }else{
+            int len = second.length() - first.length();
+            for (int i = 0; i < len; i++) {
+                first = 0 + first;
+            }
         }
         String[] carryList = new String[first.length() + 1];
         int carry = 0;
