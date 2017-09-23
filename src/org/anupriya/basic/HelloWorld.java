@@ -5,21 +5,27 @@ import java.util.List;
 
 public class HelloWorld {
 
-    public  static boolean a = false;
+    public static boolean a = false;
 
     public static void main(String[] args) {
 
         System.out.println("hello world !!");
         System.out.println(a);
 
-        System.out.println(getBinaryAddResult("11100", "11111"));
+        System.out.println(getBinaryAddResult("11111", "11"));
 
     }
 
     public static String getBinaryAddResult(String first, String second) {
-
+        if (first.length() > second.length()) {
+            int len = first.length() - second.length();
+            for (int i = 0; i < len; i++) {
+                second = 0 + second;
+            }
+            System.out.println(second);
+        }
         String[] carryList = new String[first.length() + 1];
-
+        int carry = 0;
 
         for (int i = 0; i < carryList.length; i++) {
             carryList[i] = "0";
@@ -34,45 +40,53 @@ public class HelloWorld {
             char sc = second.charAt(i - 1);
 
             if (fc == '0' && sc == '0') {
-                if (carryList[i].equals("0")) {
+                if (carry == 0) {
                     result = "0" + result;
+
                 } else {
                     result = "1" + result;
+
                 }
             } else if (fc == '1' && sc == '0') {
-                if (carryList[i].equals("0")) {
+                if (carry == 0) {
                     result = "1" + result;
+
                 } else {
-                    carryList[i - 1] = "1";
                     result = "0" + result;
-                }
-            } else if (fc == '0' && sc == '1') {
-                if (carryList[i].equals("0")) {
-                    result = "1" + result;
-                } else {
-                    carryList[i - 1] = "1";
-                    result = "0" + result;
+                    carry = 1;
                 }
 
+            } else if (fc == '0' && sc == '1') {
+                if (carry == 0) {
+                    result = "1" + result;
+
+                } else {
+                    result = "0" + result;
+                    carry = 1;
+                }
 
             } else if (fc == '1' && sc == '1') {
-                if (carryList[i].equals("1")) {
-                    carryList[i - 1] = "1";
-                    result = "1" + result;
+
+                if (carry == 0) {
+                    carry = 1;
+                    result = "0" + result;
 
                 } else {
-                    carryList[i - 1] = "1";
-                    result = "0" + result;
+                    carry = 1;
+                    // carryList[i - 1] = "1";
+                    result = "1" + result;
                 }
 
-            }
 
+            }
         }
-        if (carryList[0] == "1") {
+        if (carry == 1) {
             result = "1" + result;
+
         }
 
         return result;
     }
+
 
 }
