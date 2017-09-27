@@ -26,7 +26,7 @@ public class InPlace {
             int j = str.size() - 1 - i;
             System.out.println(j);
 
-            
+
 
             while (j >= 0) {
                 if (i >= j) {
